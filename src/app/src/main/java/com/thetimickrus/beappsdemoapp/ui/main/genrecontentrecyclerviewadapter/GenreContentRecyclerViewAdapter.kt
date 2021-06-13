@@ -10,9 +10,8 @@ import com.thetimickrus.beappsdemoapp.ui.service.ContentItemCallback
 
 class GenreContentRecyclerViewAdapter(
     context: Context,
-    private val click: (film: ContentItem) -> Unit
-) :
-    ListAdapter<ContentItem, GenreContentRecyclerViewHolder>(ContentItemCallback()) {
+    private val onItemClicked: (ContentItem) -> Unit
+) : ListAdapter<ContentItem, GenreContentRecyclerViewHolder>(ContentItemCallback()) {
 
     private val inflater: LayoutInflater = LayoutInflater.from(context)
 
@@ -30,7 +29,8 @@ class GenreContentRecyclerViewAdapter(
     }
 
     override fun onBindViewHolder(holder: GenreContentRecyclerViewHolder, position: Int) {
-        holder.bind(getItem(position), click)
+        holder.bind(getItem(position))
+        holder.itemView.setOnClickListener { onItemClicked(getItem(position)) }
     }
 
 }

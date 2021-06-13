@@ -18,7 +18,7 @@ class GenreContentRecyclerViewHolder(private val view: View) : RecyclerView.View
         titleTextView = view.findViewById(R.id.title_textview)
     }
 
-    fun bind(content: ContentItem, click: (content: ContentItem) -> Unit) {
+    fun bind(content: ContentItem) {
         Glide
             .with(view)
             .asBitmap()
@@ -27,9 +27,5 @@ class GenreContentRecyclerViewHolder(private val view: View) : RecyclerView.View
             .into(coverImageView!!)
 
         titleTextView?.text = content.title
-
-        view.setOnClickListener {
-            click.invoke(content)
-        }
     }
 }

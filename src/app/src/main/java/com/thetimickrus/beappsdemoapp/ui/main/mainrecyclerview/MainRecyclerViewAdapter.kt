@@ -9,9 +9,9 @@ import com.thetimickrus.beappsdemoapp.api.models.ContentItem
 import com.thetimickrus.beappsdemoapp.ui.service.ContentItemCallback
 
 class MainRecyclerViewAdapter(
-    private val fragment: Fragment
-) :
-    ListAdapter<ContentItem, MainRecyclerViewHolder>(ContentItemCallback()) {
+    private val fragment: Fragment,
+    private val onItemClicked: (ContentItem) -> Unit
+) : ListAdapter<ContentItem, MainRecyclerViewHolder>(ContentItemCallback()) {
 
     private val inflater: LayoutInflater = LayoutInflater.from(fragment.context)
 
@@ -26,10 +26,7 @@ class MainRecyclerViewAdapter(
     }
 
     override fun onBindViewHolder(holder: MainRecyclerViewHolder, position: Int) {
-        holder.bind(
-            fragment.activity?.supportFragmentManager ?: fragment.childFragmentManager,
-            getItem(position)
-        )
+        holder.bind(getItem(position), onItemClicked)
     }
 
 }
