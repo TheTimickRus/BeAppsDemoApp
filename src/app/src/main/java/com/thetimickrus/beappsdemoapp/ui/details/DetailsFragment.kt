@@ -1,24 +1,16 @@
 package com.thetimickrus.beappsdemoapp.ui.details
 
-import android.icu.text.CaseMap
 import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.thetimickrus.beappsdemoapp.R
 import com.thetimickrus.beappsdemoapp.api.Api
 import com.thetimickrus.beappsdemoapp.api.models.ContentItem
-import kotlinx.serialization.json.Json
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.java.KoinJavaComponent.getKoin
-import java.util.*
 
 class DetailsFragment : Fragment(R.layout.details_fragment) {
 

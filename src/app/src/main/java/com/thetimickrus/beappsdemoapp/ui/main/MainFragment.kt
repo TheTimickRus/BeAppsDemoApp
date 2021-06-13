@@ -3,7 +3,6 @@ package com.thetimickrus.beappsdemoapp.ui.main
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.thetimickrus.beappsdemoapp.R
