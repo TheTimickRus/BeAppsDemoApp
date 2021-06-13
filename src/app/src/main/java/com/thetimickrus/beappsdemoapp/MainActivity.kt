@@ -10,6 +10,7 @@ import com.thetimickrus.beappsdemoapp.ui.main.MainFragment
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import org.koin.android.ext.android.getKoin
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,8 +21,12 @@ class MainActivity : AppCompatActivity() {
         if (savedInstanceState == null) {
             supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.container, MainFragment.newInstance())
+                .add(R.id.main_activity_container, MainFragment.newInstance())
+                .add(R.id.main_activity_container, DetailsFragment.newInstance())
+                .replace(R.id.main_activity_container, MainFragment.newInstance())
                 .commitNow()
         }
+
+        getKoin().setProperty("MainFm", supportFragmentManager)
     }
 }

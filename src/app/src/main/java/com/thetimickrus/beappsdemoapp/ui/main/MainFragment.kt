@@ -25,7 +25,7 @@ class MainFragment : Fragment(R.layout.main_fragment) {
         val mainRecyclerView: RecyclerView = view.findViewById(R.id.main_recyclerview)
 
         val adapter = MainRecyclerViewAdapter(this) {
-            viewModel.onItemClick(childFragmentManager, it)
+            viewModel.onItemClick(it)
         }
 
         viewModel.getMainPage().observe(viewLifecycleOwner, {

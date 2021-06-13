@@ -5,11 +5,9 @@ import androidx.lifecycle.ViewModel
 import com.thetimickrus.beappsdemoapp.api.models.ContentItem
 
 class DetailsViewModel : ViewModel() {
+
     private val content: MutableLiveData<ContentItem> = MutableLiveData()
-
-    @JvmName("getContentJvm")
     fun getContent() = content
-
     fun setContent(contentItem: ContentItem) {
         content.value = contentItem
     }

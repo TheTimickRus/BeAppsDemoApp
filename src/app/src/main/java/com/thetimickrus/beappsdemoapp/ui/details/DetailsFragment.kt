@@ -1,6 +1,8 @@
 package com.thetimickrus.beappsdemoapp.ui.details
 
+import android.icu.text.CaseMap
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +17,7 @@ import com.thetimickrus.beappsdemoapp.api.Api
 import com.thetimickrus.beappsdemoapp.api.models.ContentItem
 import kotlinx.serialization.json.Json
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.java.KoinJavaComponent.getKoin
 
 class DetailsFragment : Fragment(R.layout.details_fragment) {
 
@@ -22,6 +25,7 @@ class DetailsFragment : Fragment(R.layout.details_fragment) {
         fun newInstance() = DetailsFragment()
     }
 
+    // Оставлено, чтобы потом использовать!
     private val viewModel: DetailsViewModel by viewModel()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -32,7 +36,9 @@ class DetailsFragment : Fragment(R.layout.details_fragment) {
         val creationAtTextView = view.findViewById<TextView>(R.id.details_creation_textview)
         val langTextView = view.findViewById<TextView>(R.id.details_lang_textview)
 
-        val film = viewModel.getContent().value
+        // ЭТО ПРЯМ ДИЧЬ ДИКАЯ, НО КАК ПО ДРУГОМУ СДЕЛАТЬ - ХЗ
+        val film = getKoin().getProperty<ContentItem>("DetailsContent")
+        // ЭТО ПРЯМ ДИЧЬ ДИКАЯ, НО КАК ПО ДРУГОМУ СДЕЛАТЬ - ХЗ
 
         Glide
             .with(requireActivity())
@@ -43,6 +49,12 @@ class DetailsFragment : Fragment(R.layout.details_fragment) {
 
         titleTextView.text = film?.title
         creationAtTextView.text = film?.createdAt
-        langTextView.text = film?.languages.toString()
+
+        val lng = ""
+        film?.languages?.forEach {
+            lng.plus("${it?.title} ")
+        }
+
+        langTextView.text = lng
     }
 }
