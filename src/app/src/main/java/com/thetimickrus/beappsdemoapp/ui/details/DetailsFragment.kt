@@ -18,6 +18,7 @@ import com.thetimickrus.beappsdemoapp.api.models.ContentItem
 import kotlinx.serialization.json.Json
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.java.KoinJavaComponent.getKoin
+import java.util.*
 
 class DetailsFragment : Fragment(R.layout.details_fragment) {
 
@@ -48,13 +49,8 @@ class DetailsFragment : Fragment(R.layout.details_fragment) {
             .into(coverImageView)
 
         titleTextView.text = film?.title
-        creationAtTextView.text = film?.createdAt
-
-        val lng = ""
-        film?.languages?.forEach {
-            lng.plus("${it?.title} ")
-        }
-
-        langTextView.text = lng
+        creationAtTextView.text = film?.createdAt ?: "---"
+        langTextView.text =
+            film?.languages?.joinToString { languagesItem -> languagesItem?.title!! }
     }
 }
