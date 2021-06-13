@@ -5,6 +5,7 @@ import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import com.thetimickrus.beappsdemoapp.api.Api
+import com.thetimickrus.beappsdemoapp.ui.details.DetailsFragment
 import com.thetimickrus.beappsdemoapp.ui.main.MainFragment
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
