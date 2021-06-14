@@ -1,47 +1,52 @@
 package com.thetimickrus.beappsdemoapp.ui.main
 
-import android.os.Handler
-import android.os.Looper
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.thetimickrus.beappsdemoapp.R
 import com.thetimickrus.beappsdemoapp.api.Api
-import com.thetimickrus.beappsdemoapp.api.models.content.ContentItem
 import com.thetimickrus.beappsdemoapp.api.models.MainPage
+import com.thetimickrus.beappsdemoapp.api.models.content.ContentItem
 import com.thetimickrus.beappsdemoapp.ui.details.DetailsFragment
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import com.thetimickrus.beappsdemoapp.ui.error.ErrorFragment
+import kotlinx.coroutines.*
 import org.koin.java.KoinJavaComponent.getKoin
+import retrofit2.awaitResponse
 
 
 class MainViewModel : ViewModel() {
-    private var mainPage: MutableLiveData<MainPage> = MutableLiveData()
 
     init {
         updateMainPage()
     }
 
-    @JvmName("getMainPageJvm")
+    private var mainPage: MutableLiveData<MainPage> = MutableLiveData()
     fun getMainPage() = mainPage
-
     fun updateMainPage() {
-        try {
-            CoroutineScope(Dispatchers.IO).launch {
-                val mp = Api.instance.getMainPage()
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val response = Api.instance.getMainPage().awaitResponse()
+                if (response.isSuccessful) {
+                    val mp = response.body()!!
 
-                Handler(Looper.getMainLooper()).post {
-                    mainPage.value = mp
+                    withContext(Dispatchers.Main) {
+                        mainPage.value = mp
+                        showToast("Данные обновлены!")
+                    }
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    showToast(e.message!!)
+
+                    // Переходим на страницу ошибки!
+                    beginTransaction(
+                        ErrorFragment.newInstance(e.message!!, e.stackTraceToString()),
+                        false
+                    )
                 }
             }
-        } catch (e: Exception) {
-            Toast.makeText(
-                getKoin().getProperty<AppCompatActivity>("MainActivity"),
-                e.message,
-                Toast.LENGTH_LONG
-            ).show()
         }
     }
 
@@ -50,12 +55,38 @@ class MainViewModel : ViewModel() {
         getKoin().setProperty("DetailsContent", contentItem)
         // ЭТО ПРЯМ ДИЧЬ ДИКАЯ, НО КАК ПО ДРУГОМУ СДЕЛАТЬ - ХЗ
 
-        // ЭТО, ЧЕСТНО ГОВОРЯ, ТОЖЕ ТАКОЕ СЕБЕ
-        getKoin().getProperty<AppCompatActivity>("MainActivity")?.supportFragmentManager
-            ?.beginTransaction()
-            ?.addToBackStack(null)
-            ?.replace(R.id.main_activity_container, DetailsFragment.newInstance())
-            ?.commit()
-        // ЭТО, ЧЕСТНО ГОВОРЯ, ТОЖЕ ТАКОЕ СЕБЕ
+        beginTransaction(DetailsFragment.newInstance())
     }
+
+    private fun showToast(message: String, length: Int = Toast.LENGTH_LONG) {
+        val context = getKoin().getProperty<AppCompatActivity>("MainActivity")
+            ?.applicationContext
+
+        Toast.makeText(
+            context,
+            message,
+            length
+        ).show()
+    }
+
+    // ЭТО, ЧЕСТНО ГОВОРЯ, ТОЖЕ ТАКОЕ СЕБЕ
+    private fun beginTransaction(
+        fragment: Fragment,
+        isAddToBackStack: Boolean = true,
+        layout: Int = R.id.main_activity_container
+    ) {
+        val transactionManager =
+            getKoin().getProperty<AppCompatActivity>("MainActivity")
+                ?.supportFragmentManager
+                ?.beginTransaction()
+
+        if (isAddToBackStack) {
+            transactionManager?.addToBackStack(null)
+        }
+
+        transactionManager
+            ?.replace(layout, fragment)
+            ?.commit()
+    }
+
 }

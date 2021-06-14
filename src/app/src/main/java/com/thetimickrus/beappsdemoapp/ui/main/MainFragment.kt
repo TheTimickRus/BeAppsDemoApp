@@ -23,10 +23,13 @@ class MainFragment : Fragment(R.layout.main_fragment) {
         val swipeRefresh = view.findViewById<SwipeRefreshLayout>(R.id.swipe_refresh)
         val mainRecyclerView: RecyclerView = view.findViewById(R.id.main_recyclerview)
 
+        if (savedInstanceState == null) {
+            swipeRefresh?.isRefreshing = true
+        }
+
         val adapter = MainRecyclerViewAdapter {
             viewModel.onItemClick(it)
         }
-
         viewModel.getMainPage().observe(viewLifecycleOwner, {
             it?.let {
                 swipeRefresh?.isRefreshing = true

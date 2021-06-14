@@ -5,6 +5,7 @@ import com.thetimickrus.beappsdemoapp.api.models.MainPage
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
+import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.create
 
@@ -20,8 +21,6 @@ class Api {
     private val client = OkHttpClient.Builder()
         .build()
 
-    private val contentType = "application/json".toMediaType()
-
     private val json = Json {
         prettyPrint = true
         ignoreUnknownKeys = true
@@ -30,7 +29,7 @@ class Api {
     private val retrofitBuilder = Retrofit.Builder()
         .baseUrl(Domain)
         .client(client)
-        .addConverterFactory(json.asConverterFactory(contentType))
+        .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
         .build()
 
     private val service: SignalMediaCorpService = retrofitBuilder.create()
@@ -38,7 +37,7 @@ class Api {
     //=====================================================================
 
     // Получаем главную страницу
-    suspend fun getMainPage(): MainPage {
+    fun getMainPage(): Call<MainPage> {
         return service.getMainPage()
     }
 
