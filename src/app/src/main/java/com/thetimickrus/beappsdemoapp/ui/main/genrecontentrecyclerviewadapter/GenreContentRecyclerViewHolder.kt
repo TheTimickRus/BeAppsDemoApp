@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.thetimickrus.beappsdemoapp.R
 import com.thetimickrus.beappsdemoapp.api.Api
-import com.thetimickrus.beappsdemoapp.api.models.ContentItem
+import com.thetimickrus.beappsdemoapp.api.models.content.ContentItem
 
 class GenreContentRecyclerViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
     private var coverImageView: ImageView? = null

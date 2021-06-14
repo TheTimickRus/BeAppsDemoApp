@@ -33,7 +33,7 @@ class Api {
         .addConverterFactory(json.asConverterFactory(contentType))
         .build()
 
-    private val service: ApiService = retrofitBuilder.create()
+    private val service: SignalMediaCorpService = retrofitBuilder.create()
 
     //=====================================================================
 

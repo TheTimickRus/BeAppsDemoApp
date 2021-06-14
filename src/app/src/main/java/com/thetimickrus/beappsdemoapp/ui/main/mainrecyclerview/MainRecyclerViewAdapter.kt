@@ -2,22 +2,19 @@ package com.thetimickrus.beappsdemoapp.ui.main.mainrecyclerview
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ListAdapter
 import com.thetimickrus.beappsdemoapp.R
-import com.thetimickrus.beappsdemoapp.api.models.ContentItem
-import com.thetimickrus.beappsdemoapp.ui.service.ContentItemCallback
+import com.thetimickrus.beappsdemoapp.api.models.content.Content
+import com.thetimickrus.beappsdemoapp.api.models.content.ContentItem
+import com.thetimickrus.beappsdemoapp.ui.service.ContentCallback
 
 class MainRecyclerViewAdapter(
-    private val fragment: Fragment,
     private val onItemClicked: (ContentItem) -> Unit
-) : ListAdapter<ContentItem, MainRecyclerViewHolder>(ContentItemCallback()) {
-
-    private val inflater: LayoutInflater = LayoutInflater.from(fragment.context)
+) : ListAdapter<Content, MainRecyclerViewHolder>(ContentCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainRecyclerViewHolder {
         return MainRecyclerViewHolder(
-            inflater.inflate(
+            LayoutInflater.from(parent.context).inflate(
                 R.layout.main_recyclerview_item,
                 parent,
                 false

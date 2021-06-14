@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.thetimickrus.beappsdemoapp.R
 import com.thetimickrus.beappsdemoapp.api.Api
-import com.thetimickrus.beappsdemoapp.api.models.ContentItem
+import com.thetimickrus.beappsdemoapp.api.models.content.ContentItem
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.java.KoinJavaComponent.getKoin
 
@@ -20,6 +20,7 @@ class DetailsFragment : Fragment(R.layout.details_fragment) {
 
     // Оставлено, чтобы потом использовать!
     private val viewModel: DetailsViewModel by viewModel()
+    // Оставлено, чтобы потом использовать!
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

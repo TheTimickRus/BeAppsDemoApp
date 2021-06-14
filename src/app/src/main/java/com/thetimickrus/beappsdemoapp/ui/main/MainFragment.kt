@@ -23,7 +23,7 @@ class MainFragment : Fragment(R.layout.main_fragment) {
         val swipeRefresh = view.findViewById<SwipeRefreshLayout>(R.id.swipe_refresh)
         val mainRecyclerView: RecyclerView = view.findViewById(R.id.main_recyclerview)
 
-        val adapter = MainRecyclerViewAdapter(this) {
+        val adapter = MainRecyclerViewAdapter {
             viewModel.onItemClick(it)
         }
 

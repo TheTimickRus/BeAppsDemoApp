@@ -18,9 +18,11 @@ class MainActivity : AppCompatActivity() {
                 .add(R.id.main_activity_container, MainFragment.newInstance())
                 .add(R.id.main_activity_container, DetailsFragment.newInstance())
                 .replace(R.id.main_activity_container, MainFragment.newInstance())
-                .commitNow()
+                .commit()
         }
 
-        getKoin().setProperty("MainFm", supportFragmentManager)
+        // Понимаю, что это такое себе, но очень много костылей было,
+        // из - за отсутствия прямого доступа к основной активности
+        getKoin().setProperty("MainActivity", this)
     }
 }
