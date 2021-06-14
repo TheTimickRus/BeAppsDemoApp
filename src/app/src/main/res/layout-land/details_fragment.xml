@@ -15,11 +15,10 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/details_fragment_cover_imageview"
-            android:layout_width="400dp"
+            android:layout_width="300dp"
             android:layout_height="500dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginStart="12dp"
-            android:layout_marginEnd="12dp"
             android:layout_marginBottom="12dp"
             app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize10Percent" />
 

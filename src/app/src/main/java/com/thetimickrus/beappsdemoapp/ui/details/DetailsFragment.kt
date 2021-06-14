@@ -1,25 +1,18 @@
 package com.thetimickrus.beappsdemoapp.ui.details
 
-import android.icu.util.LocaleData
-import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.annotation.RequiresApi
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.thetimickrus.beappsdemoapp.R
 import com.thetimickrus.beappsdemoapp.api.Api
 import com.thetimickrus.beappsdemoapp.api.models.content.ContentItem
-import kotlinx.datetime.LocalDate
-import kotlinx.datetime.toJavaLocalDateTime
-import kotlinx.datetime.toLocalDate
 import kotlinx.datetime.toLocalDateTime
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.java.KoinJavaComponent.getKoin
-import java.time.format.DateTimeFormatter
-import java.time.format.DateTimeFormatterBuilder
 
 class DetailsFragment : Fragment(R.layout.details_fragment) {
 
@@ -31,7 +24,6 @@ class DetailsFragment : Fragment(R.layout.details_fragment) {
     private val viewModel: DetailsViewModel by viewModel()
     // Оставлено, чтобы потом использовать!
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -43,7 +35,7 @@ class DetailsFragment : Fragment(R.layout.details_fragment) {
         // ЭТО ПРЯМ ДИЧЬ ДИКАЯ, НО КАК ПО ДРУГОМУ СДЕЛАТЬ - ХЗ
         val film = getKoin().getProperty<ContentItem>("DetailsContent")
         // ЭТО ПРЯМ ДИЧЬ ДИКАЯ, НО КАК ПО ДРУГОМУ СДЕЛАТЬ - ХЗ
-        
+
         Glide
             .with(requireActivity())
             .asBitmap()
@@ -53,13 +45,20 @@ class DetailsFragment : Fragment(R.layout.details_fragment) {
 
         titleTextView.text = film?.title
 
-        creationAtTextView.text =
-            film?.createdAt
-                ?.replace(' ', 'T')
-                ?.toLocalDateTime()?.toJavaLocalDateTime()
-                ?.format(
-                    DateTimeFormatter.ofPattern("dd-MM-yy")
-                )
+        var creationAt = "---"
+        try {
+            /*
+                // Почему - то крашится...
+                creationAt = film?.createdAt
+                    ?.replace(' ', 'T')
+                    ?.toLocalDateTime()?.toJavaLocalDateTime()
+                    ?.format(DateTimeFormatter.ofPattern("dd-MM-yy"))!!
+             */
+        } catch (e: Exception) {
+            Toast.makeText(view.context, e.message, Toast.LENGTH_SHORT).show()
+        }
+
+        creationAtTextView.text = creationAt
 
         langTextView.text =
             film?.languages?.joinToString { languagesItem -> languagesItem.title!! }
