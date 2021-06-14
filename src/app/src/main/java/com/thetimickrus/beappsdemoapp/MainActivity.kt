@@ -2,8 +2,6 @@ package com.thetimickrus.beappsdemoapp
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.thetimickrus.beappsdemoapp.ui.details.DetailsFragment
-import com.thetimickrus.beappsdemoapp.ui.error.ErrorFragment
 import com.thetimickrus.beappsdemoapp.ui.main.MainFragment
 import org.koin.android.ext.android.getKoin
 

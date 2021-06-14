@@ -1,6 +1,9 @@
 <resources>
+
     <string name="app_name">BeAppsDemoApp</string>
     <string name="cover_content_description">Cover</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="details_fragment_lang">Доступные языки:</string>
+    <string name="details_fragment_creation_at">Дата создания:</string>
+    <string name="details_fragment_title">Название:</string>
+
 </resources>

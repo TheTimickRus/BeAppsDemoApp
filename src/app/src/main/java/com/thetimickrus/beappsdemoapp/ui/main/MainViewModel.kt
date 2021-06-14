@@ -11,7 +11,10 @@ import com.thetimickrus.beappsdemoapp.api.models.MainPage
 import com.thetimickrus.beappsdemoapp.api.models.content.ContentItem
 import com.thetimickrus.beappsdemoapp.ui.details.DetailsFragment
 import com.thetimickrus.beappsdemoapp.ui.error.ErrorFragment
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.koin.java.KoinJavaComponent.getKoin
 import retrofit2.awaitResponse
 

@@ -1,4 +1,4 @@
-package com.thetimickrus.beappsdemoapp.ui.service
+package com.thetimickrus.beappsdemoapp.ui.services
 
 import androidx.recyclerview.widget.DiffUtil
 import com.thetimickrus.beappsdemoapp.api.models.content.Content

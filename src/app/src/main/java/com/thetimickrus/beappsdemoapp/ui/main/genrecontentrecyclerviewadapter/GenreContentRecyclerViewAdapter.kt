@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.thetimickrus.beappsdemoapp.R
 import com.thetimickrus.beappsdemoapp.api.models.content.ContentItem
-import com.thetimickrus.beappsdemoapp.ui.service.ContentItemCallback
+import com.thetimickrus.beappsdemoapp.ui.services.ContentItemCallback
 
 class GenreContentRecyclerViewAdapter(
     private val onItemClicked: (ContentItem) -> Unit

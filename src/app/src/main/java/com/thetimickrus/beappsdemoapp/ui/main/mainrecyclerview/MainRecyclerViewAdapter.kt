@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.ListAdapter
 import com.thetimickrus.beappsdemoapp.R
 import com.thetimickrus.beappsdemoapp.api.models.content.Content
 import com.thetimickrus.beappsdemoapp.api.models.content.ContentItem
-import com.thetimickrus.beappsdemoapp.ui.service.ContentCallback
+import com.thetimickrus.beappsdemoapp.ui.services.ContentCallback
 
 class MainRecyclerViewAdapter(
     private val onItemClicked: (ContentItem) -> Unit

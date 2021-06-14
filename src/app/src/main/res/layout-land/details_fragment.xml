@@ -11,11 +11,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:orientation="vertical">
+        android:orientation="horizontal">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/details_fragment_cover_imageview"
-            android:layout_width="match_parent"
+            android:layout_width="400dp"
             android:layout_height="500dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginStart="12dp"
@@ -96,7 +96,6 @@
                 tools:text="LANG" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
     </LinearLayout>
 
 </ScrollView>

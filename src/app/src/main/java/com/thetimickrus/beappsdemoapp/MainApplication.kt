@@ -23,6 +23,7 @@ class MainApplication : Application() {
             viewModel {
                 DetailsViewModel()
             }
+
         }
 
         startKoin {
