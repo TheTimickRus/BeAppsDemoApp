@@ -1,10 +1,11 @@
 package com.thetimickrus.beappsdemoapp.ui.main
 
+import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.thetimickrus.beappsdemoapp.MainActivity
 import com.thetimickrus.beappsdemoapp.R
 import com.thetimickrus.beappsdemoapp.api.Api
 import com.thetimickrus.beappsdemoapp.api.models.MainPage
@@ -41,24 +42,29 @@ class MainViewModel : ViewModel() {
                 }
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
-                    showToast(e.message!!)
+                    // Подготавливаем аргументы
+                    val bundle = Bundle()
+                    bundle.putString(ErrorFragment.E_MSG, e.message)
 
-                    // Переходим на страницу ошибки!
-                    beginTransaction(
-                        ErrorFragment.newInstance(e.message!!, e.stackTraceToString()),
-                        false
-                    )
+                    // Переход на страницу ошибки
+                    getKoin().getProperty<MainActivity>("MainActivity")
+                        ?.navController?.navigate(R.id.action_mainFragment_to_errorFragment, bundle)
                 }
             }
         }
     }
 
     fun onItemClick(contentItem: ContentItem) {
-        // ЭТО ПРЯМ ДИЧЬ ДИКАЯ, НО КАК ПО ДРУГОМУ СДЕЛАТЬ - ХЗ
-        getKoin().setProperty("DetailsContent", contentItem)
-        // ЭТО ПРЯМ ДИЧЬ ДИКАЯ, НО КАК ПО ДРУГОМУ СДЕЛАТЬ - ХЗ
+        // Подготавливаем аргументы
+        val bundle = Bundle()
+        bundle.putParcelable(DetailsFragment.CONTENT, contentItem)
 
-        beginTransaction(DetailsFragment.newInstance())
+        // Переход на страницу с детальной информацией
+        getKoin().getProperty<MainActivity>("MainActivity")
+            ?.navController?.navigate(
+                R.id.action_mainFragment_to_detailsFragment,
+                bundle
+            )
     }
 
     private fun showToast(message: String, length: Int = Toast.LENGTH_LONG) {
@@ -70,26 +76,6 @@ class MainViewModel : ViewModel() {
             message,
             length
         ).show()
-    }
-
-    // ЭТО, ЧЕСТНО ГОВОРЯ, ТОЖЕ ТАКОЕ СЕБЕ
-    private fun beginTransaction(
-        fragment: Fragment,
-        isAddToBackStack: Boolean = true,
-        layout: Int = R.id.main_activity_container
-    ) {
-        val transactionManager =
-            getKoin().getProperty<AppCompatActivity>("MainActivity")
-                ?.supportFragmentManager
-                ?.beginTransaction()
-
-        if (isAddToBackStack) {
-            transactionManager?.addToBackStack(null)
-        }
-
-        transactionManager
-            ?.replace(layout, fragment)
-            ?.commit()
     }
 
 }

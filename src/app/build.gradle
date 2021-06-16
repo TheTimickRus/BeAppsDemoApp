@@ -4,6 +4,8 @@ plugins {
 
     id 'org.jetbrains.kotlin.plugin.serialization' version '1.5.10'
     id 'kotlin-parcelize'
+
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 android {
@@ -49,6 +51,8 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation 'androidx.compose:compose-runtime:0.1.0-dev14'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
     testImplementation 'junit:junit:4.13.2'
 
     // Glide

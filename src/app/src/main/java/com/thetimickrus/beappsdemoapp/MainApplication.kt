@@ -1,7 +1,6 @@
 package com.thetimickrus.beappsdemoapp
 
 import android.app.Application
-import com.thetimickrus.beappsdemoapp.ui.details.DetailsViewModel
 import com.thetimickrus.beappsdemoapp.ui.main.MainViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -18,10 +17,6 @@ class MainApplication : Application() {
 
             viewModel {
                 MainViewModel()
-            }
-
-            viewModel {
-                DetailsViewModel()
             }
 
         }

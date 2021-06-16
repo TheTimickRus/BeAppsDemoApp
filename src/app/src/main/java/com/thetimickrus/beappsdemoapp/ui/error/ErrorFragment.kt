@@ -1,50 +1,25 @@
 package com.thetimickrus.beappsdemoapp.ui.error
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.thetimickrus.beappsdemoapp.R
 
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class ErrorFragment : Fragment(R.layout.fragment_error) {
 
-class ErrorFragment : Fragment() {
-    private var eMessage: String? = null
-    private var eStackTrace: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            eMessage = it.getString(ARG_PARAM1)
-            eStackTrace = it.getString(ARG_PARAM2)
-        }
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_error, container, false)
+    companion object {
+        const val E_MSG = "eMessage"
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Получаем ошибку...
+        val eMessage = arguments?.getString(E_MSG) ?: "Error!"
+
         val messageTextView = view.findViewById<TextView>(R.id.error_fragment_message_textview)
-        messageTextView?.text = eMessage!!
+        messageTextView?.text = eMessage
     }
 
-    companion object {
-        @JvmStatic
-        fun newInstance(eMsg: String, eTrace: String) =
-            ErrorFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, eMsg)
-                    putString(ARG_PARAM2, eTrace)
-                }
-            }
-    }
 }
