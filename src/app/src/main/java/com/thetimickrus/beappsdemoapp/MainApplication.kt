@@ -1,7 +1,7 @@
 package com.thetimickrus.beappsdemoapp
 
 import android.app.Application
-import com.thetimickrus.beappsdemoapp.ui.main.MainViewModel
+import com.thetimickrus.beappsdemoapp.viewmodels.MainViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.androidx.viewmodel.dsl.viewModel

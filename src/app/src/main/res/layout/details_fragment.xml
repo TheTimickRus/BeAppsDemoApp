@@ -16,7 +16,7 @@
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/details_fragment_cover_imageview"
             android:layout_width="match_parent"
-            android:layout_height="500dp"
+            android:layout_height="450dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginStart="12dp"
             android:layout_marginEnd="12dp"

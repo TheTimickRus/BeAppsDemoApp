@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.thetimickrus.beappsdemoapp.R
 import com.thetimickrus.beappsdemoapp.ui.main.mainrecyclerview.MainRecyclerViewAdapter
+import com.thetimickrus.beappsdemoapp.viewmodels.MainViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainFragment : Fragment(R.layout.main_fragment) {

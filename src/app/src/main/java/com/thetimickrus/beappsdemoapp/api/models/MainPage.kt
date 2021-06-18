@@ -1,6 +1,5 @@
 package com.thetimickrus.beappsdemoapp.api.models
 
-
 import android.os.Parcelable
 import com.thetimickrus.beappsdemoapp.api.models.banner.Banner
 import com.thetimickrus.beappsdemoapp.api.models.content.Content

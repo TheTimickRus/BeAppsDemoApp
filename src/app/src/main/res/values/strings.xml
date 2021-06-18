@@ -11,5 +11,6 @@
     <string name="details_fragment_lang">Доступные языки:</string>
     <string name="details_fragment_creation_at">Дата создания:</string>
     <string name="details_fragment_title">Название:</string>
+    <string name="main_recyclerview_item_ib_arrow">More</string>
 
 </resources>
